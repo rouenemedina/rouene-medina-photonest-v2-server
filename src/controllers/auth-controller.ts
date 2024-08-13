@@ -1,8 +1,8 @@
 import initKnex from "knex";
 import configuration from "../knexfile.ts";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import "dotenv/config";
 
 const knex = initKnex(configuration);
@@ -107,7 +107,7 @@ const userLogin = async (
     });
   }
 
-  const secret = process.env.JWT_SECRET;
+  const secret = process.env.JWT_SECRET as string;
   if (!secret) {
     throw new Error("Authentication Error");
   }
@@ -121,7 +121,37 @@ const userLogin = async (
 };
 
 //verify token
+interface CustomRequest extends Request {
+    user ?: string | JwtPayload
+}
+
+const verifyToken = (req: CustomRequest, res: Response, next: NextFunction) => {
+ const authHeader = req.headers.authorization as string | undefined;
+
+ if(!authHeader || typeof authHeader !== "string") {
+    return res.status(401).json({
+        message: "Authentication failed.",
+        error: "401"
+    });
+ }
+
+ const authToken = authHeader.split("")[1] as string;
+ const secret = process.env.JWT_SECRET as string;
+
+ let decodedToken;
+ try {
+    decodedToken = jwt.verify(authToken, secret);
+    req.user = decodedToken;
+    next();
+ } catch (err) {
+    console.log(err);
+    return res.status(401).json({
+        message: "Authentication error",
+        error: "401"
+    });
+ }
+}
 
 //GET /auth/profile
 
-export { userRegistration, userLogin };
+export { userRegistration, userLogin, verifyToken};
