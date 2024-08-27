@@ -5,6 +5,8 @@ import bcrypt from "bcryptjs";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import "dotenv/config";
 
+console.log(configuration);
+
 const knex = initKnex(configuration);
 
 //Create a new user(sign-up)
@@ -14,6 +16,7 @@ interface UserRegistrationBody {
   user_last_name: string;
   user_email: string;
   user_password: string;
+  user_confirm_password?: string;
   user_type: string;
 }
 
@@ -34,7 +37,7 @@ const userRegistration = async (
     !user_last_name ||
     !user_email ||
     !user_password ||
-    user_type
+    !user_type
   ) {
     return res.status(400).json({
       message: "Please fill up the required fields",
@@ -42,7 +45,8 @@ const userRegistration = async (
     });
   }
 
-  const hashedPassword = bcrypt.hashSync(user_password);
+  const hashedPassword = bcrypt.hashSync(user_password, 10);
+  // const hashedConfirmPassword = bcrypt.hashSync(user_confirm_password);
 
   const newUser = {
     user_first_name,
@@ -144,7 +148,7 @@ const verifyToken = (req: CustomRequest, res: Response, next: NextFunction) => {
     });
   }
 
-  const authToken = authHeader.split("")[1] as string;
+  const authToken = authHeader.split(" ")[1] as string;
   const secret = process.env.JWT_SECRET as string;
 
   let decodedToken;
