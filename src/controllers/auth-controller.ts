@@ -119,7 +119,7 @@ const userLogin = async (
   const token = jwt.sign(
     { user_id: user.user_id, user_email: user.user_email },
     secret,
-    { expiresIn: "5m" }
+    { expiresIn: "1m" }
   );
   res.json({ user_id: user.user_id, user_type: user.user_type, token: token });
 };
