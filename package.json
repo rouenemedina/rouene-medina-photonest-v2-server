@@ -5,19 +5,25 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "npx tsx src/index.ts"
+    "dev": "npx tsx src/index.ts",
+    "migrate:latest": "npx knex migrate:latest --knexfile src/configurations/knexfile.ts",
+    "migrate:rollback": "npx knex migrate:rollback --knexfile src/configurations/knexfile.ts",
+    "seed": "npx knex seed:run --knexfile src/configurations/knexfile.ts"
   },
   "keywords": [],
   "author": "Rouene Medina",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.7.5",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "form-data": "^4.0.0",
     "jsonwebtoken": "^9.0.2",
     "knex": "^3.1.0",
+    "multer": "^1.4.5-lts.1",
     "nodemon": "^3.1.4",
     "pg": "^8.12.0"
   },
