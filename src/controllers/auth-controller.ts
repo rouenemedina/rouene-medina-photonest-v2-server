@@ -5,8 +5,6 @@ import bcrypt from "bcryptjs";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import "dotenv/config";
 
-console.log(configuration);
-
 const knex = initKnex(configuration);
 
 //Create a new user(sign-up)
