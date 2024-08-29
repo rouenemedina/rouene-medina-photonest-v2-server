@@ -70,7 +70,7 @@ const uploadImg = async (req: UploadRequest, res: Response) => {
     };
     console.log(newImg);
 
-    //TODO: create table
+    //TODO: create table/refactor code to delete this portion where there is a need for a table
     await knex("").insert(newImg);
     fs.unlinkSync(file.path);
     res.json({ url: imageUrl });
