@@ -1,10 +1,13 @@
 import express, { Router } from "express";
 import multer from "multer";
-import * as cloudinaryController from "../controllers/cloudinary-controller.ts";
+import * as uploadImgController from "../controllers/uploadImg-controller.ts";
 
 const router: Router = express.Router();
 const upload = multer({ dest: "uploads/" });
 
-router.route("/").post(upload.single("file"), cloudinaryController.uploadImg);
+//TODO: check if I still need this. 
+
+router.route("/")
+  .post(upload.single("file"), uploadImgController.uploadImgHandler);
 
 export default router;

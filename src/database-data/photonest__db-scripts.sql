@@ -1,20 +1,87 @@
 -- GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO photonest_service_account;
 -- GRANT USAGE, SELECT ON SEQUENCE contact_contact_id_seq TO photonest_service_account;
+-- GRANT USAGE, SELECT ON SEQUENCE portfolio_portfolio_id_seq TO photonest_service_account;
+-- GRANT USAGE, SELECT ON SEQUENCE hero_hero_id_seq TO photonest_service_account;
+-- GRANT USAGE, SELECT ON SEQUENCE featured_featured_id_seq TO photonest_service_account;
+-- GRANT USAGE, SELECT ON SEQUENCE about_about_id_seq TO photonest_service_account;
+-- GRANT USAGE, SELECT ON SEQUENCE connect_connect_id_seq TO photonest_service_account;
+-- GRANT USAGE, SELECT ON SEQUENCE gallery_gallery_id_seq TO photonest_service_account;
 
 -- CREATE TABLE users (
--- user_id SERIAL PRIMARY KEY,
--- user_first_name VARCHAR(255) NOT NULL,
--- user_last_name VARCHAR(255) NOT NULL,
--- user_email VARCHAR(255) NOT NULL, 
--- user_password VARCHAR(255) NOT NULL,
--- user_type VARCHAR(255) NOT NULL,
+    -- user_id SERIAL PRIMARY KEY,
+    -- user_first_name VARCHAR(255) NOT NULL,
+    -- user_last_name VARCHAR(255) NOT NULL,
+    -- user_email VARCHAR(255) NOT NULL, 
+    -- user_password VARCHAR(255) NOT NULL,
+    -- user_type VARCHAR(255) NOT NULL,
 -- );
 
 -- CREATE TABLE contact (
--- contact_id SERIAL PRIMARY KEY,
--- contact_name VARCHAR(255) NOT NULL,
--- contact_email VARCHAR(255) NOT NULL, 
--- contact_message TEXT NOT NULL, 
--- contact_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    -- contact_id SERIAL PRIMARY KEY,
+    -- contact_name VARCHAR(255) NOT NULL,
+    -- contact_email VARCHAR(255) NOT NULL, 
+    -- contact_message TEXT NOT NULL, 
+    -- contact_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 -- );
 
+-- CREATE TABLE portfolio (
+    -- portfolio_id SERIAL PRIMARY KEY, 
+    -- user_id INT NOT NULL, 
+    -- FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE
+-- );
+
+-- CREATE TABLE hero (
+    -- hero_id SERIAL PRIMARY KEY,
+    -- hero_description TEXT NOT NULL,
+    -- hero_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    -- hero_url VARCHAR(255) NOT NULL,
+    -- user_id INT NOT NULL,
+    -- portfolio_id INT,
+    -- FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE,
+    -- FOREIGN KEY (portfolio_id) REFERENCES portfolio (portfolio_id) ON DELETE CASCADE
+-- );
+
+-- CREATE TABLE featured (
+--     featured_id SERIAL PRIMARY KEY,
+--     featured_title VARCHAR(255) NOT NULL,
+--     featured_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     featured_url VARCHAR(255) NOT NULL,
+--     user_id INT NOT NULL,
+--     portfolio_id INT,
+--     FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE,
+--     FOREIGN KEY (portfolio_id) REFERENCES portfolio (portfolio_id) ON DELETE CASCADE
+-- );
+
+-- CREATE TABLE about (
+--     about_id SERIAL PRIMARY KEY,
+--     about_name VARCHAR(255) NOT NULL,
+--     about_description TEXT NOT NULL,
+--     about_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     about_url VARCHAR(255) NOT NULL,
+--     user_id INT NOT NULL,
+--     portfolio_id INT,
+--     FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE,
+--     FOREIGN KEY (portfolio_id) REFERENCES portfolio (portfolio_id) ON DELETE CASCADE
+-- );
+
+-- CREATE TABLE connect (
+--     connect_id SERIAL PRIMARY KEY,
+--     connect_email VARCHAR(255) NOT NULL,
+--     connect_description TEXT NOT NULL,
+--     connect_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     connect_url VARCHAR(255) NOT NULL,
+--     user_id INT NOT NULL,
+--     portfolio_id INT,
+--     FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE,
+--     FOREIGN KEY (portfolio_id) REFERENCES portfolio (portfolio_id) ON DELETE CASCADE
+-- );
+
+-- CREATE TABLE gallery (
+--     gallery_id SERIAL PRIMARY KEY,
+--     gallery_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     gallery_url VARCHAR(255) NOT NULL,
+--     user_id INT NOT NULL,
+--     portfolio_id INT,
+--     FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE,
+--     FOREIGN KEY (portfolio_id) REFERENCES portfolio (portfolio_id) ON DELETE CASCADE
+-- );

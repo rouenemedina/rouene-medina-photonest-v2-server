@@ -1,16 +1,13 @@
-import initKnex from "knex";
-import configuration from "../configurations/knexfile.ts";
-import "dotenv/config";
-import { Request, Response } from "express";
+import express, { Router } from "express";
+import multer from "multer";
+import * as heroController from "../controllers/hero-controller.ts";
 
-const knex = initKnex(configuration);
+const router: Router = express.Router();
+const upload = multer({ dest: "uploads/" });
 
-interface HeroBody {
-    hero_description: string;
-    user_id: number;
-}
+router.route("/")
+  .post(upload.single("file"), heroController.uploadHero);
 
-//POST /upload
-const uploadImg = async (req: Request<{}, {}>, res: Response) => {
+router.route("/:userId").get(heroController.heroIndex);
 
-};
+export default router;
