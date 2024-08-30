@@ -14,7 +14,7 @@ const knex = initKnex(configuration);
 //POST /upload
 const uploadHero = async (req: Request, res: Response) => {
     const table_name = "hero";
-    return uploadImgHandler(table_name);
+    await uploadImgHandler(table_name)(req, res);
 };
 
 //GET /hero/:userId

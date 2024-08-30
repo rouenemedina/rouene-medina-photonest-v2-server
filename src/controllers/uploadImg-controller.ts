@@ -10,10 +10,6 @@ import {
 const knex = initKnex(configuration);
 
 interface DynamicUploadBody extends Record<string, any> {
-  // image_title?: string;
-  // image_description?: string;
-  // image_tags?: string;
-  // image_timestamp: Date;
   user_id: number;
   category_id?: number;
   table_name: string;
@@ -29,6 +25,8 @@ const uploadImgHandler = (table_name: string) => {
     try {
       const file = req.file;
       const { ...bodyFields } = req.body as DynamicUploadBody;
+
+      console.log(bodyFields);
   
       const validationError = validateFileAndUser({
         files: file ? [file] : [],
@@ -40,18 +38,19 @@ const uploadImgHandler = (table_name: string) => {
       }
   
       //check if category_id exist
-      if (!bodyFields.category_id) {
-        return res.status(400).json({
-          message: "No category ID provided.",
-          error: "400",
-        });
-      }
+      // if (!bodyFields.category_id) {
+      //   return res.status(400).json({
+      //     message: "No category ID provided.",
+      //     error: "400",
+      //   });
+      // }
   
       const imageUrl = await uploadFilesToCloudinary({ filePaths: [file!.path] });
   
+      const keyName = `${table_name}_url`;
       const newImg = {
         ...bodyFields,
-        image_url: imageUrl[0],
+        [keyName]: imageUrl[0],
       };
       console.log(newImg);
   
