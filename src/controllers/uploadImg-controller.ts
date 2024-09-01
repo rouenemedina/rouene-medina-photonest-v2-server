@@ -27,12 +27,11 @@ const uploadImgHandler = (table_name: string) => {
       const singleFile = req.file;
       let multipleFiles: Express.Multer.File[] = [];
       //check for type(an array or an object)
-      if (Array.isArray(req.file)) {
-        multipleFiles
-      } else if (typeof req.files) {
-
+      if (Array.isArray(req.files)) {
+        multipleFiles = req.files;
+      } else if (req.files && typeof req.files === 'object') {
+        multipleFiles = Object.values(req.files).flat();
       }
-
       const { ...bodyFields } = req.body as DynamicUploadBody;
 
       console.log(bodyFields);
