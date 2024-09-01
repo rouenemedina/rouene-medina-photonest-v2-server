@@ -8,6 +8,9 @@ const knex = initKnex(configuration);
 
 //POST /upload
 const uploadFeatured = async (req: Request, res: Response) => {
+  console.log("uploadFeatured reached");
+  console.log("Files received:", req.files);
+  console.log("Body received:", req.body);
   const table_name = "featured";
   await uploadImgHandler(table_name)(req, res);
 };

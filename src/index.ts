@@ -4,6 +4,7 @@ import cors from "cors";
 import authRoutes from "./routes/auth.ts";
 import cloudinaryRoutes from "./routes/cloudinary.ts";
 import heroRoutes from "./routes/hero.ts";
+import featuredRoutes from "./routes/featured.ts";
 import contactRoutes from "./routes/contact.ts";
 
 const app: Application = express();
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/auth", authRoutes);
 app.use("/upload", cloudinaryRoutes);
 app.use("/hero", heroRoutes);
+app.use("/featured", featuredRoutes);
 app.use("/contact", contactRoutes);
 
 app.listen(PORT, () => {
