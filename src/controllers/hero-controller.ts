@@ -1,5 +1,5 @@
 import initKnex from "knex";
-import configuration from "../configurations/knexfile.ts";
+import configuration from "configurations/knexfile.ts";
 import "dotenv/config";
 import { Request, Response } from "express";
 import { uploadImgHandler } from "./uploadImg-controller.ts";

@@ -6,6 +6,7 @@ import cloudinaryRoutes from "./routes/cloudinary.ts";
 import heroRoutes from "./routes/hero.ts";
 import featuredRoutes from "./routes/featured.ts";
 import contactRoutes from "./routes/contact.ts";
+import aboutRoutes from "./routes/about.ts";
 
 const app: Application = express();
 const PORT: number = parseInt(process.env.PORT as string) || 8081;
@@ -18,6 +19,7 @@ app.use("/auth", authRoutes);
 app.use("/upload", cloudinaryRoutes);
 app.use("/hero", heroRoutes);
 app.use("/featured", featuredRoutes);
+app.use("/about", aboutRoutes);
 app.use("/contact", contactRoutes);
 
 app.listen(PORT, () => {
