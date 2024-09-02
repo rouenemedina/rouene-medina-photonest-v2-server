@@ -7,8 +7,8 @@ import heroRoutes from "./routes/hero.ts";
 import featuredRoutes from "./routes/featured.ts";
 import aboutRoutes from "./routes/about.ts";
 import connectRoutes from "./routes/connect.ts";
+import galleryRoutes from "./routes/gallery.ts";
 import contactRoutes from "./routes/contact.ts";
-
 
 const app: Application = express();
 const PORT: number = parseInt(process.env.PORT as string) || 8081;
@@ -23,6 +23,7 @@ app.use("/hero", heroRoutes);
 app.use("/featured", featuredRoutes);
 app.use("/about", aboutRoutes);
 app.use("/connect", connectRoutes);
+app.use("/gallery", galleryRoutes);
 app.use("/contact", contactRoutes);
 
 app.listen(PORT, () => {
