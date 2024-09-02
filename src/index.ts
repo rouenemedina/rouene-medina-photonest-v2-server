@@ -9,6 +9,7 @@ import aboutRoutes from "./routes/about.ts";
 import connectRoutes from "./routes/connect.ts";
 import galleryRoutes from "./routes/gallery.ts";
 import contactRoutes from "./routes/contact.ts";
+import userCheckerRoutes from "./routes/userChecker.ts";
 
 const app: Application = express();
 const PORT: number = parseInt(process.env.PORT as string) || 8081;
@@ -25,6 +26,7 @@ app.use("/about", aboutRoutes);
 app.use("/connect", connectRoutes);
 app.use("/gallery", galleryRoutes);
 app.use("/contact", contactRoutes);
+app.use("/user-checker", userCheckerRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
